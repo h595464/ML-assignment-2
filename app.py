@@ -1,10 +1,14 @@
 import json, joblib
 import pandas as pd
 from flask import Flask, render_template, request
-
+from labels import LABELS
 app = Flask(__name__)
 model = joblib.load("model.joblib")
 options = json.load(open("options.json"))
+display_options = {
+    feature: [(c, LABELS.get(feature, {}).get(c, c)) for c in codes]
+    for feature, codes in options.items()
+}
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -20,7 +24,7 @@ def index():
             "poisonous": pred == "p",
             "confidence": round(confidence, 1),
         }
-    return render_template("index.html", options=options, result=result)
+    return render_template("index.html", options=display_options, result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)

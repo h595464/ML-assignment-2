@@ -19,10 +19,12 @@
     {% for feature, choices in options.items() %}
       <label>{{ feature.replace('-', ' ').title() }}
         <select name="{{ feature }}">
-          {% for c in choices %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
-        </select>
-      </label>
-    {% endfor %}
+          {% for code, name in choices %}
+        <option value="{{ code }}">{{ name|title }}</option>
+      {% endfor %}
+    </select>
+  </label>
+{% endfor %}
     <button type="submit">Classify</button>
   </form>
 
