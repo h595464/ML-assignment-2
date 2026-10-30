@@ -1,0 +1,7 @@
+k,accuracy,recall_poisonous,features
+1,0.9858,0.9706,odor
+2,0.9858,0.9706,"odor, gill-size"
+3,0.9926,0.9847,"odor, gill-size, spore-print-color"
+5,1.0,1.0,"odor, gill-size, spore-print-color, stalk-surface-below-ring, ring-type"
+8,1.0,1.0,...
+22,1.0,1.0,...
