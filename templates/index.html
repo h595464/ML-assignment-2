@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mushroom Classifier</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 2rem auto; padding: 0 1rem; }
+    label { display: block; margin-top: .8rem; font-weight: 600; }
+    select { width: 100%; padding: .4rem; }
+    button { margin-top: 1.5rem; padding: .7rem 1.5rem; font-size: 1rem; }
+    .result { margin-top: 2rem; padding: 1rem; border-radius: 8px; font-size: 1.2rem; }
+    .bad { background: #fde2e2; } .good { background: #e2f5e2; }
+    .warn { font-size: .85rem; color: #666; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Mushroom Toxicity Classifier</h1>
+  <form method="POST">
+    {% for feature, choices in options.items() %}
+      <label>{{ feature.replace('-', ' ').title() }}
+        <select name="{{ feature }}">
+          {% for c in choices %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+        </select>
+      </label>
+    {% endfor %}
+    <button type="submit">Classify</button>
+  </form>
+
+  {% if result %}
+    <div class="result {{ 'bad' if result.poisonous else 'good' }}">
+      {{ result.label }} — {{ result.confidence }}% confidence
+    </div>
+  {% endif %}
+
+  <p class="warn">Educational project only. Never use this to decide whether a wild mushroom is safe to eat.</p>
+</body>
+</html>
